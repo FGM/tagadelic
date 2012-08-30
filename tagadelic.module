@@ -334,7 +334,8 @@ function theme_tagadelic_weighted(array $vars) {
       )
     ) . " \n";
   }
-  if (count($terms) >= variable_get('tagadelic_block_tags_' . $vars['voc']->vid, 12)) {
+  // Only add a "more" link when the cloud is build for a single vocabulary.
+  if (isset($vars['voc']) && count($terms) >= variable_get('tagadelic_block_tags_' . $vars['voc']->vid, 12)) {
     $output .= theme('more_link', array('title' => t('more tags'), 'url' => "tagadelic/chunk/{$vars['voc']->vid}"));
   }
   return $output;
